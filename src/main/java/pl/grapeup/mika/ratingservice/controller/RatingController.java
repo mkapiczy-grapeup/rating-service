@@ -27,6 +27,8 @@ public class RatingController {
     @GetMapping(value = "/{roomId}")
     public String getRating(@PathVariable Long roomId) {
         Rating rating = ratingService.getRatingForRoom(roomId);
-        return "Room id: " + roomId + "\nRating: " + rating.getRating() + "\nOpinion: " + rating.getOpinion() + " | " + instance;
+        return rating != null ?
+                "Room id: " + roomId + "\nRating: " + rating.getRating() + "\nOpinion: " + rating.getOpinion() + " | " + instance :
+                "No rating for room " + roomId + " | " + instance;
     }
 }
