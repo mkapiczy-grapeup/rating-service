@@ -1,11 +1,9 @@
 package pl.grapeup.mika.ratingservice.controller;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.grapeup.mika.ratingservice.model.Rating;
 import pl.grapeup.mika.ratingservice.service.RatingService;
 
@@ -20,8 +18,9 @@ public class RatingController {
     private RatingService ratingService;
 
     @GetMapping
-    public String getInstance() {
-        return instance;
+    @ResponseBody
+    public String getAll() {
+        return  new Gson().toJson(ratingService.getAllRatings()) + " | " + instance;
     }
 
     @GetMapping(value = "/{roomId}")
